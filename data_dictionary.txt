@@ -1,0 +1,30 @@
+E-COMMERCE SALES DATA DICTIONARY
+==================================================
+
+Row ID: Unique identifier for each row
+Order ID: Unique identifier for each order
+Order Date: Date when the order was placed
+Ship Date: Date when the order was shipped
+Ship Mode: Shipping method used
+Customer ID: Unique identifier for each customer
+Customer Name: Name of the customer
+Segment: Customer segment (Consumer, Corporate, Home Office)
+Country: Country where order was placed
+City: City where order was placed
+State: State where order was placed
+Postal Code: Postal code of delivery location
+Region: Geographic region (West, East, Central, South)
+Product ID: Unique identifier for each product
+Category: Product category (Furniture, Office Supplies, Technology)
+Sub-Category: Product sub-category
+Product Name: Name of the product
+Sales: Revenue generated from the sale
+Profit: Profit generated (synthetic data based on industry margins)
+Profit_Margin: Profit as percentage of sales
+Year: Year extracted from Order Date
+Month: Month extracted from Order Date
+Quarter: Quarter extracted from Order Date
+Day_of_Week: Day of week when order was placed
+Month_Name: Month name when order was placed
+Sales_Category: Sales amount category (Low, Medium, High, Very High)
+Profit_Category: Profit amount category (Loss, Low, Medium, High)
