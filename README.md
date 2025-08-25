@@ -2,7 +2,7 @@
 
 A comprehensive data analytics project analyzing the Sample Superstore Sales Dataset to identify sales optimization opportunities and provide actionable business recommendations.
 
-## 🎯 Project Objectives
+## Project Objectives
 
 - Analyze top-performing products, categories, and regions
 - Conduct profitability vs revenue analysis to identify profit drivers
@@ -10,17 +10,17 @@ A comprehensive data analytics project analyzing the Sample Superstore Sales Dat
 - Create compelling visualizations using Python
 - Generate actionable business recommendations for sales optimization
 
-## 📊 Dataset
+## Dataset
 
 **Source**: [Kaggle - Sample Superstore Sales Dataset](https://www.kaggle.com/datasets/rohitsahoo/sales-forecasting)
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Python**: Pandas, NumPy, Matplotlib, Seaborn, Plotly
 - **Jupyter Notebook**: Interactive analysis environment
 - **Data Visualization**: Charts, dashboards, and trend analysis
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Ecommerce-Sales-Optimization/
@@ -33,7 +33,7 @@ Ecommerce-Sales-Optimization/
 └── README.md                      # Project documentation
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -55,7 +55,7 @@ Ecommerce-Sales-Optimization/
    jupyter notebook notebooks/ecommerce_analysis.ipynb
    ```
 
-## 📈 Key Analysis Areas
+## Key Analysis Areas
 
 - **Category Performance**: Revenue and profit analysis by product categories
 - **Regional Analysis**: Geographic performance comparison
@@ -64,7 +64,7 @@ Ecommerce-Sales-Optimization/
 - **Time Trends**: Monthly and quarterly sales patterns
 - **Business Recommendations**: Data-driven optimization strategies
 
-## 🎯 Business Impact
+## Business Impact
 
 This analysis provides insights to:
 - Optimize product portfolio focus

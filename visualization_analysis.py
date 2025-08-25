@@ -24,16 +24,16 @@ def load_data():
     try:
         df = pd.read_csv('data/superstore_sales_cleaned.csv')
         df['Order Date'] = pd.to_datetime(df['Order Date'])
-        print(f"✅ Loaded dataset: {df.shape}")
+        print(f"Loaded dataset: {df.shape}")
         return df
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
+        print(f"Error loading data: {e}")
         return None
 
 def create_time_trend_visualizations(df):
     """Create comprehensive time trend visualizations"""
     print("\n" + "="*60)
-    print("📈 CREATING TIME TREND VISUALIZATIONS")
+    print("CREATING TIME TREND VISUALIZATIONS")
     print("="*60)
     
     # 1. Monthly Sales and Profit Trends
@@ -79,13 +79,13 @@ def create_time_trend_visualizations(df):
     plt.savefig('visualizations/monthly_trends.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Monthly trends visualization saved")
+    print("Monthly trends visualization saved")
     
     return monthly_data
 
 def create_category_performance_charts(df):
     """Create category performance visualizations"""
-    print("\n📊 Creating category performance charts...")
+    print("\nCreating category performance charts...")
     
     # Category analysis
     category_data = df.groupby('Category').agg({
@@ -146,11 +146,11 @@ def create_category_performance_charts(df):
     plt.savefig('visualizations/category_performance.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Category performance charts saved")
+    print("Category performance charts saved")
 
 def create_regional_analysis_charts(df):
     """Create regional performance visualizations"""
-    print("\n🌍 Creating regional analysis charts...")
+    print("\nCreating regional analysis charts...")
     
     # Regional analysis
     regional_data = df.groupby('Region').agg({
@@ -188,11 +188,11 @@ def create_regional_analysis_charts(df):
     plt.savefig('visualizations/regional_performance.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Regional performance charts saved")
+    print("Regional performance charts saved")
 
 def create_profitability_scatter_plot(df):
     """Create sales vs profit scatter plot by sub-category"""
-    print("\n💰 Creating profitability scatter plot...")
+    print("\nCreating profitability scatter plot...")
     
     # Sub-category analysis
     subcategory_data = df.groupby('Sub-Category').agg({
@@ -237,11 +237,11 @@ def create_profitability_scatter_plot(df):
     plt.savefig('visualizations/sales_vs_profit_scatter.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Profitability scatter plot saved")
+    print("Profitability scatter plot saved")
 
 def create_seasonal_analysis(df):
     """Analyze and visualize seasonal patterns"""
-    print("\n🗓️ Creating seasonal analysis...")
+    print("\nCreating seasonal analysis...")
     
     # Quarterly analysis
     quarterly_data = df.groupby(['Year', 'Quarter']).agg({
@@ -297,11 +297,11 @@ def create_seasonal_analysis(df):
     plt.savefig('visualizations/day_of_week_analysis.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Seasonal analysis charts saved")
+    print("Seasonal analysis charts saved")
 
 def create_customer_segment_charts(df):
     """Create customer segment visualizations"""
-    print("\n👥 Creating customer segment charts...")
+    print("\nCreating customer segment charts...")
     
     # Segment analysis
     segment_data = df.groupby('Segment').agg({
@@ -351,11 +351,11 @@ def create_customer_segment_charts(df):
     plt.savefig('visualizations/customer_segment_analysis.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Customer segment charts saved")
+    print("Customer segment charts saved")
 
 def create_summary_dashboard(df):
     """Create a comprehensive summary dashboard"""
-    print("\n📊 Creating summary dashboard...")
+    print("\nCreating summary dashboard...")
     
     # Key metrics
     total_sales = df['Sales'].sum()
@@ -424,11 +424,11 @@ def create_summary_dashboard(df):
     plt.savefig('visualizations/summary_dashboard.png', dpi=300, bbox_inches='tight')
     plt.show()
     
-    print("✅ Summary dashboard saved")
+    print("Summary dashboard saved")
 
 def main():
     """Main visualization execution function"""
-    print("🚀 E-COMMERCE SALES OPTIMIZATION - VISUALIZATION ANALYSIS")
+    print("E-COMMERCE SALES OPTIMIZATION - VISUALIZATION ANALYSIS")
     print("="*60)
     
     # Load data
@@ -445,9 +445,9 @@ def main():
     create_customer_segment_charts(df)
     create_summary_dashboard(df)
     
-    print(f"\n✅ STEP 6 COMPLETED SUCCESSFULLY!")
-    print(f"📊 All visualizations saved to visualizations/ folder")
-    print(f"🎯 Ready for Step 7: Final Insights & Recommendations")
+    print(f"\nSTEP 6 COMPLETED SUCCESSFULLY!")
+    print(f"All visualizations saved to visualizations/ folder")
+    print(f"Ready for Step 7: Final Insights & Recommendations")
     
     return df
 

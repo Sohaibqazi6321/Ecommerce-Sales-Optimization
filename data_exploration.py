@@ -34,41 +34,41 @@ def load_and_explore_data():
         for file_path in possible_files:
             try:
                 df = pd.read_csv(file_path, encoding='latin-1')
-                print(f"✅ Dataset loaded from: {file_path}")
+                print(f"Dataset loaded from: {file_path}")
                 break
             except FileNotFoundError:
                 continue
         
         if df is None:
-            print("❌ Dataset not found. Please check the data/ folder.")
+            print("Dataset not found. Please check the data/ folder.")
             print("Expected files: superstore_sales.csv, Sample - Superstore.csv, or train.csv")
             return None
             
     except Exception as e:
-        print(f"❌ Error loading dataset: {e}")
+        print(f"Error loading dataset: {e}")
         return None
     
     # Basic dataset information
-    print(f"\n📊 DATASET OVERVIEW")
+    print(f"\nDATASET OVERVIEW")
     print(f"Shape: {df.shape}")
     print(f"Columns: {len(df.columns)}")
     print(f"Memory usage: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB")
     
     # Display column names
-    print(f"\n📋 COLUMN NAMES:")
+    print(f"\nCOLUMN NAMES:")
     for i, col in enumerate(df.columns, 1):
         print(f"{i:2d}. {col}")
     
     # Data types
-    print(f"\n🔍 DATA TYPES:")
+    print(f"\nDATA TYPES:")
     print(df.dtypes)
     
     # First few rows
-    print(f"\n👀 FIRST 5 ROWS:")
+    print(f"\nFIRST 5 ROWS:")
     print(df.head())
     
     # Missing values analysis
-    print(f"\n🔍 MISSING VALUES ANALYSIS:")
+    print(f"\nMISSING VALUES ANALYSIS:")
     missing_data = df.isnull().sum()
     missing_percent = (missing_data / len(df)) * 100
     
@@ -83,16 +83,16 @@ def load_and_explore_data():
     if len(missing_summary) > 0:
         print(missing_summary.to_string(index=False))
     else:
-        print("✅ No missing values found!")
+        print("No missing values found!")
     
     # Basic statistics for numeric columns
-    print(f"\n📈 NUMERIC COLUMNS SUMMARY:")
+    print(f"\nNUMERIC COLUMNS SUMMARY:")
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     if len(numeric_cols) > 0:
         print(df[numeric_cols].describe())
     
     # Categorical columns summary
-    print(f"\n📝 CATEGORICAL COLUMNS SUMMARY:")
+    print(f"\nCATEGORICAL COLUMNS SUMMARY:")
     categorical_cols = df.select_dtypes(include=['object']).columns
     for col in categorical_cols:
         unique_count = df[col].nunique()
@@ -103,7 +103,7 @@ def load_and_explore_data():
             print(f"  Sample values: {list(df[col].unique()[:5])}...")
     
     # Identify key columns for analysis
-    print(f"\n🎯 KEY COLUMN IDENTIFICATION:")
+    print(f"\nKEY COLUMNS IDENTIFIED:")
     
     # Find sales/revenue column
     sales_cols = [col for col in df.columns if any(word in col.lower() for word in ['sales', 'revenue'])]
@@ -135,7 +135,7 @@ def analyze_data_quality(df):
     """
     Analyze data quality issues
     """
-    print(f"\n🔍 DATA QUALITY ANALYSIS:")
+    print(f"\nDATA QUALITY ANALYSIS:")
     
     # Check for duplicates
     duplicate_count = df.duplicated().sum()
@@ -181,7 +181,7 @@ def save_exploration_summary(df):
         for col, dtype in summary['data_types'].items():
             f.write(f"{col}: {dtype}\n")
     
-    print(f"\n💾 Exploration summary saved to: data_exploration_summary.txt")
+    print(f"\nExploration summary saved to: data_exploration_summary.txt")
 
 if __name__ == "__main__":
     # Run the exploration
@@ -191,9 +191,9 @@ if __name__ == "__main__":
         analyze_data_quality(df)
         save_exploration_summary(df)
         
-        print(f"\n✅ STEP 2 COMPLETED!")
+        print(f"\nSTEP 2 COMPLETED!")
         print(f"Dataset loaded with {df.shape[0]} rows and {df.shape[1]} columns")
         print(f"Ready for Step 3: Data Cleaning")
     else:
-        print(f"\n❌ Please download the dataset first!")
+        print(f"\nPlease download the dataset first!")
         print(f"See data_download_instructions.md for details")

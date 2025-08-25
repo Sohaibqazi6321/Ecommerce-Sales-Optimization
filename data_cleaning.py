@@ -14,7 +14,7 @@ def create_synthetic_profit_data(df):
     """
     Create realistic profit data based on industry-standard margins by category and sub-category
     """
-    print("🔧 Creating synthetic profit data...")
+    print("Creating synthetic profit data...")
     
     # Industry-realistic profit margins by category (as percentages)
     category_margins = {
@@ -125,35 +125,35 @@ def clean_and_prepare_data():
     # Load the dataset
     try:
         df = pd.read_csv('data/superstore_sales.csv', encoding='latin-1')
-        print(f"✅ Dataset loaded: {df.shape[0]} rows, {df.shape[1]} columns")
+        print(f"Dataset loaded: {df.shape[0]} rows, {df.shape[1]} columns")
     except FileNotFoundError:
-        print("❌ Dataset not found in data/ folder")
+        print("Dataset not found in data/ folder")
         return None
     
     # Create a copy for cleaning
     df_clean = df.copy()
     
-    print(f"\n🔍 INITIAL DATA ANALYSIS:")
+    print(f"\nINITIAL DATA ANALYSIS:")
     print(f"Shape: {df_clean.shape}")
     print(f"Missing values: {df_clean.isnull().sum().sum()}")
     
     # 1. Convert date columns
-    print(f"\n📅 Converting date columns...")
+    print(f"\nConverting date columns...")
     date_columns = ['Order Date', 'Ship Date']
     for col in date_columns:
         if col in df_clean.columns:
             df_clean[col] = pd.to_datetime(df_clean[col], format='%d/%m/%Y')
-            print(f"   ✅ Converted {col}")
+            print(f"   Converted {col}")
     
     # 2. Clean text columns
-    print(f"\n🧹 Cleaning text columns...")
+    print(f"\nCleaning text columns...")
     text_columns = ['Customer Name', 'Product Name', 'City', 'State']
     for col in text_columns:
         if col in df_clean.columns:
             df_clean[col] = df_clean[col].str.strip()
     
     # 3. Handle missing values
-    print(f"\n🔧 Handling missing values...")
+    print(f"\nHandling missing values...")
     missing_before = df_clean.isnull().sum().sum()
     
     # Fill missing postal codes with 0
@@ -164,13 +164,13 @@ def clean_and_prepare_data():
     print(f"   Missing values: {missing_before} → {missing_after}")
     
     # 4. Create synthetic profit data
-    print(f"\n💰 Generating synthetic profit data...")
+    print(f"\nGenerating synthetic profit data...")
     np.random.seed(42)  # For reproducible results
     profits = create_synthetic_profit_data(df_clean)
     df_clean['Profit'] = profits
     
     # 5. Create calculated fields
-    print(f"\n📊 Creating calculated fields...")
+    print(f"\nCreating calculated fields...")
     
     # Profit Margin
     df_clean['Profit_Margin'] = (df_clean['Profit'] / df_clean['Sales']) * 100
@@ -192,10 +192,10 @@ def clean_and_prepare_data():
                                         bins=[-float('inf'), 0, 50, 200, float('inf')],
                                         labels=['Loss', 'Low Profit', 'Medium Profit', 'High Profit'])
     
-    print(f"   ✅ Created profit margins, date features, and performance categories")
+    print(f"   Created profit margins, date features, and performance categories")
     
     # 6. Data quality summary
-    print(f"\n📈 CLEANED DATA SUMMARY:")
+    print(f"\nCLEANED DATA SUMMARY:")
     print(f"Final shape: {df_clean.shape}")
     print(f"Date range: {df_clean['Order Date'].min()} to {df_clean['Order Date'].max()}")
     print(f"Sales range: ${df_clean['Sales'].min():.2f} to ${df_clean['Sales'].max():.2f}")
@@ -203,7 +203,7 @@ def clean_and_prepare_data():
     print(f"Average profit margin: {df_clean['Profit_Margin'].mean():.1f}%")
     
     # Category breakdown
-    print(f"\n📋 CATEGORY BREAKDOWN:")
+    print(f"\nCATEGORY BREAKDOWN:")
     category_summary = df_clean.groupby('Category').agg({
         'Sales': ['count', 'sum', 'mean'],
         'Profit': ['sum', 'mean'],
@@ -214,7 +214,7 @@ def clean_and_prepare_data():
     # 7. Save cleaned dataset
     output_file = 'data/superstore_sales_cleaned.csv'
     df_clean.to_csv(output_file, index=False)
-    print(f"\n💾 Cleaned dataset saved to: {output_file}")
+    print(f"\nCleaned dataset saved to: {output_file}")
     
     # 8. Save data dictionary
     save_data_dictionary(df_clean)
@@ -260,15 +260,15 @@ def save_data_dictionary(df):
         for col, desc in data_dict.items():
             f.write(f"{col}: {desc}\n")
     
-    print(f"📖 Data dictionary saved to: data_dictionary.txt")
+    print(f"Data dictionary saved to: data_dictionary.txt")
 
 if __name__ == "__main__":
     df_cleaned = clean_and_prepare_data()
     
     if df_cleaned is not None:
-        print(f"\n✅ STEP 3 COMPLETED SUCCESSFULLY!")
-        print(f"📊 Ready for Step 4: Exploratory Data Analysis")
-        print(f"💡 Synthetic profit data created using realistic industry margins")
+        print(f"\nSTEP 3 COMPLETED SUCCESSFULLY!")
+        print(f"Ready for Step 4: Exploratory Data Analysis")
+        print(f"Synthetic profit data created using realistic industry margins")
     else:
-        print(f"\n❌ STEP 3 FAILED!")
+        print(f"\nSTEP 3 FAILED!")
         print(f"Please check the dataset location")

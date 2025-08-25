@@ -6,9 +6,9 @@ directories = ['data', 'visualizations']
 for directory in directories:
     if not os.path.exists(directory):
         os.makedirs(directory)
-        print(f"✅ Created {directory}/ folder")
+        print(f"Created folder: {directory}")
     else:
-        print(f"📁 {directory}/ folder already exists")
+        print(f"Folder already exists: {directory}")
 
-print("\n🎯 Folder structure ready!")
+print("\nProject structure setup complete!")
 print("Next: Download dataset to data/ folder")

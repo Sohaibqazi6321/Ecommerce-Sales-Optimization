@@ -1,23 +1,23 @@
 E-COMMERCE PROFITABILITY OPTIMIZATION RECOMMENDATIONS
 ============================================================
 
-🔧 PRODUCT OPTIMIZATION:
+PRODUCT OPTIMIZATION:
    • Focus on 5 profit trap categories ($1,188,903 sales)
    • Consider price increases or cost reductions for low-margin items
 
-👥 CUSTOMER OPTIMIZATION:
+CUSTOMER OPTIMIZATION:
    • Review 2 loss-making customers
    • Implement minimum order values or service fees
 
-🌍 REGIONAL OPTIMIZATION:
+REGIONAL OPTIMIZATION:
    • Replicate Central success model (32.1% margin)
    • Improve West operations (28.8% margin)
 
-⭐ PORTFOLIO OPTIMIZATION:
+PORTFOLIO OPTIMIZATION:
    • Invest more in 2 'Star' products
    • Consider discontinuing 3 'Dog' products
 
-💰 PROFIT IMPROVEMENT POTENTIAL:
+PROFIT IMPROVEMENT POTENTIAL:
    • Current margin: 30.4%
    • Target margin: 35%
    • Potential profit increase: $104,305

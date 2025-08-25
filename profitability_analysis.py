@@ -24,16 +24,16 @@ def load_data():
     try:
         df = pd.read_csv('data/superstore_sales_cleaned.csv')
         df['Order Date'] = pd.to_datetime(df['Order Date'])
-        print(f"✅ Loaded dataset: {df.shape}")
+        print(f"Loaded dataset: {df.shape}")
         return df
     except Exception as e:
-        print(f"❌ Error loading data: {e}")
+        print(f"Error loading data: {e}")
         return None
 
 def analyze_high_sales_low_profit(df):
     """Identify high sales, low profit items - the profit traps"""
     print("\n" + "="*60)
-    print("⚠️ HIGH SALES, LOW PROFIT ANALYSIS")
+    print("HIGH SALES, LOW PROFIT ANALYSIS")
     print("="*60)
     
     # Sub-category analysis
@@ -55,18 +55,18 @@ def analyze_high_sales_low_profit(df):
         (subcategory_profit['Avg_Profit_Margin'] < 20)
     ].sort_values('Total_Sales', ascending=False)
     
-    print(f"\n🚨 PROFIT TRAPS (High Sales, Low Margins < 20%):")
+    print(f"\nPROFIT TRAPS (High Sales, Low Margins < 20%):")
     if len(profit_traps) > 0:
         print(profit_traps)
         
         total_trap_sales = profit_traps['Total_Sales'].sum()
         total_trap_profit = profit_traps['Total_Profit'].sum()
-        print(f"\n📊 Profit Trap Impact:")
+        print(f"\nProfit Trap Impact:")
         print(f"   • Total Sales in Traps: ${total_trap_sales:,.2f}")
         print(f"   • Total Profit from Traps: ${total_trap_profit:,.2f}")
         print(f"   • Average Margin in Traps: {profit_traps['Avg_Profit_Margin'].mean():.1f}%")
     else:
-        print("   ✅ No significant profit traps identified!")
+        print("   No significant profit traps identified!")
     
     # Identify profit stars: High sales AND high margins
     profit_stars = subcategory_profit[
@@ -74,7 +74,7 @@ def analyze_high_sales_low_profit(df):
         (subcategory_profit['Avg_Profit_Margin'] > 30)
     ].sort_values('Total_Profit', ascending=False)
     
-    print(f"\n⭐ PROFIT STARS (High Sales, High Margins > 30%):")
+    print(f"\nPROFIT STARS (High Sales, High Margins > 30%):")
     if len(profit_stars) > 0:
         print(profit_stars)
     else:
@@ -85,7 +85,7 @@ def analyze_high_sales_low_profit(df):
 def analyze_customer_profitability(df):
     """Analyze customer profitability patterns"""
     print("\n" + "="*60)
-    print("👥 CUSTOMER PROFITABILITY ANALYSIS")
+    print("CUSTOMER PROFITABILITY ANALYSIS")
     print("="*60)
     
     # Customer-level profitability
@@ -122,15 +122,15 @@ def analyze_customer_profitability(df):
     
     segment_summary.columns = ['Avg_Customer_Sales', 'Avg_Customer_Profit', 'Avg_Profit_Margin', 'Customer_Count']
     
-    print(f"\n📊 CUSTOMER SEGMENT PROFITABILITY:")
+    print(f"\nCUSTOMER SEGMENT PROFITABILITY:")
     print(segment_summary)
     
     # Top and bottom customers
-    print(f"\n🏆 TOP 10 MOST PROFITABLE CUSTOMERS:")
+    print(f"\nTOP 10 MOST PROFITABLE CUSTOMERS:")
     top_customers = customer_profit.nlargest(10, 'Total_Profit')
     print(top_customers[['Total_Sales', 'Total_Profit', 'Avg_Profit_Margin', 'Order_Count']])
     
-    print(f"\n📉 BOTTOM 10 CUSTOMERS (Losses):")
+    print(f"\nBOTTOM 10 CUSTOMERS (Losses):")
     loss_customers = customer_profit[customer_profit['Total_Profit'] < 0].nsmallest(10, 'Total_Profit')
     if len(loss_customers) > 0:
         print(loss_customers[['Total_Sales', 'Total_Profit', 'Avg_Profit_Margin', 'Order_Count']])
@@ -142,7 +142,7 @@ def analyze_customer_profitability(df):
 def analyze_regional_profitability(df):
     """Analyze profitability by region and identify optimization opportunities"""
     print("\n" + "="*60)
-    print("🌍 REGIONAL PROFITABILITY ANALYSIS")
+    print("REGIONAL PROFITABILITY ANALYSIS")
     print("="*60)
     
     # Regional profitability matrix
@@ -155,7 +155,7 @@ def analyze_regional_profitability(df):
     
     regional_matrix.columns = ['Sales', 'Profit', 'Avg_Margin', 'Orders']
     
-    print(f"\n📊 REGIONAL-CATEGORY PERFORMANCE MATRIX:")
+    print(f"\nREGIONAL-CATEGORY PERFORMANCE MATRIX:")
     print(regional_matrix)
     
     # Regional efficiency analysis
@@ -172,14 +172,14 @@ def analyze_regional_profitability(df):
     regional_efficiency['Sales_Per_Order'] = regional_efficiency['Total_Sales'] / regional_efficiency['Total_Orders']
     regional_efficiency['Profit_Per_Order'] = regional_efficiency['Total_Profit'] / regional_efficiency['Total_Orders']
     
-    print(f"\n🎯 REGIONAL EFFICIENCY METRICS:")
+    print(f"\nREGIONAL EFFICIENCY METRICS:")
     print(regional_efficiency)
     
     # Identify underperforming regions
     avg_margin = df['Profit_Margin'].mean()
     underperforming = regional_efficiency[regional_efficiency['Avg_Profit_Margin'] < avg_margin]
     
-    print(f"\n⚠️ UNDERPERFORMING REGIONS (Below {avg_margin:.1f}% avg margin):")
+    print(f"\nUNDERPERFORMING REGIONS (Below {avg_margin:.1f}% avg margin):")
     if len(underperforming) > 0:
         print(underperforming[['Avg_Profit_Margin', 'Total_Sales', 'Total_Profit']])
     else:
@@ -190,7 +190,7 @@ def analyze_regional_profitability(df):
 def analyze_product_profitability_matrix(df):
     """Create product profitability matrix for portfolio optimization"""
     print("\n" + "="*60)
-    print("📦 PRODUCT PROFITABILITY MATRIX")
+    print("PRODUCT PROFITABILITY MATRIX")
     print("="*60)
     
     # Product performance matrix
@@ -226,10 +226,10 @@ def analyze_product_profitability_matrix(df):
         'Avg_Margin': 'mean'
     }).round(2)
     
-    print(f"\n🎯 PRODUCT PORTFOLIO ANALYSIS:")
+    print(f"\nPRODUCT PORTFOLIO ANALYSIS:")
     print(f"Sales Median: ${sales_median:,.2f}")
     print(f"Margin Median: {margin_median:.1f}%")
-    print(f"\n📊 Portfolio Categories:")
+    print(f"\nPORTFOLIO CATEGORIES:")
     
     for category in ['Stars', 'Cash Cows', 'Question Marks', 'Dogs']:
         products = product_matrix[product_matrix['Category_Type'] == category]
@@ -242,7 +242,7 @@ def analyze_product_profitability_matrix(df):
 def generate_profitability_recommendations(df, profit_traps, customer_profit, regional_efficiency, product_matrix):
     """Generate actionable profitability recommendations"""
     print("\n" + "="*60)
-    print("💡 PROFITABILITY OPTIMIZATION RECOMMENDATIONS")
+    print("PROFITABILITY OPTIMIZATION RECOMMENDATIONS")
     print("="*60)
     
     recommendations = []
@@ -250,14 +250,14 @@ def generate_profitability_recommendations(df, profit_traps, customer_profit, re
     # 1. Product recommendations
     if len(profit_traps) > 0:
         trap_sales = profit_traps['Total_Sales'].sum()
-        recommendations.append(f"🔧 PRODUCT OPTIMIZATION:")
+        recommendations.append("PRODUCT OPTIMIZATION:")
         recommendations.append(f"   • Focus on {len(profit_traps)} profit trap categories (${trap_sales:,.0f} sales)")
         recommendations.append(f"   • Consider price increases or cost reductions for low-margin items")
     
     # 2. Customer recommendations
     loss_customers = len(customer_profit[customer_profit['Total_Profit'] < 0])
     if loss_customers > 0:
-        recommendations.append(f"\n👥 CUSTOMER OPTIMIZATION:")
+        recommendations.append("\nCUSTOMER OPTIMIZATION:")
         recommendations.append(f"   • Review {loss_customers} loss-making customers")
         recommendations.append(f"   • Implement minimum order values or service fees")
     
@@ -265,7 +265,7 @@ def generate_profitability_recommendations(df, profit_traps, customer_profit, re
     best_region = regional_efficiency.loc[regional_efficiency['Avg_Profit_Margin'].idxmax()]
     worst_region = regional_efficiency.loc[regional_efficiency['Avg_Profit_Margin'].idxmin()]
     
-    recommendations.append(f"\n🌍 REGIONAL OPTIMIZATION:")
+    recommendations.append("\nREGIONAL OPTIMIZATION:")
     recommendations.append(f"   • Replicate {best_region.name} success model ({best_region['Avg_Profit_Margin']:.1f}% margin)")
     recommendations.append(f"   • Improve {worst_region.name} operations ({worst_region['Avg_Profit_Margin']:.1f}% margin)")
     
@@ -274,7 +274,7 @@ def generate_profitability_recommendations(df, profit_traps, customer_profit, re
     dogs = product_matrix[product_matrix['Category_Type'] == 'Dogs']
     
     if len(stars) > 0:
-        recommendations.append(f"\n⭐ PORTFOLIO OPTIMIZATION:")
+        recommendations.append("\nPORTFOLIO OPTIMIZATION:")
         recommendations.append(f"   • Invest more in {len(stars)} 'Star' products")
     
     if len(dogs) > 0:
@@ -286,7 +286,7 @@ def generate_profitability_recommendations(df, profit_traps, customer_profit, re
     
     if current_margin < target_margin:
         improvement_potential = (target_margin - current_margin) / 100 * df['Sales'].sum()
-        recommendations.append(f"\n💰 PROFIT IMPROVEMENT POTENTIAL:")
+        recommendations.append("\nPROFIT IMPROVEMENT POTENTIAL:")
         recommendations.append(f"   • Current margin: {current_margin:.1f}%")
         recommendations.append(f"   • Target margin: {target_margin}%")
         recommendations.append(f"   • Potential profit increase: ${improvement_potential:,.0f}")
@@ -312,13 +312,13 @@ def save_profitability_analysis(profit_traps, customer_profit, regional_efficien
         f.write("="*60 + "\n\n")
         f.write("\n".join(recommendations))
     
-    print(f"\n💾 Analysis saved to:")
+    print(f"\nAnalysis saved to:")
     print(f"   • profitability_analysis.xlsx")
     print(f"   • profitability_recommendations.txt")
 
 def main():
     """Main profitability analysis execution"""
-    print("🚀 E-COMMERCE SALES OPTIMIZATION - PROFITABILITY ANALYSIS")
+    print("E-COMMERCE SALES OPTIMIZATION - PROFITABILITY ANALYSIS")
     print("="*60)
     
     # Load data
@@ -340,8 +340,8 @@ def main():
     # Save results
     save_profitability_analysis(profit_traps, customer_profit, regional_efficiency, product_matrix, recommendations)
     
-    print(f"\n✅ STEP 5 COMPLETED SUCCESSFULLY!")
-    print(f"💡 Profitability analysis complete - ready for Step 6: Time Trends & Visualizations")
+    print(f"\nSTEP 5 COMPLETED SUCCESSFULLY!")
+    print(f"Profitability analysis complete - ready for Step 6: Time Trends & Visualizations")
     
     return df, profit_traps, customer_profit, product_matrix
 
