@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 
 def load_data():
-    """Load the cleaned dataset and analysis results"""
+    """Gets the data"""
     try:
         df = pd.read_csv('data/superstore_sales_cleaned.csv')
         df['Order Date'] = pd.to_datetime(df['Order Date'])
@@ -15,27 +15,26 @@ def load_data():
         return None
 
 def generate_executive_summary(df):
-    """Generate executive summary with key metrics"""
     print("\nGenerating executive summary...")
     
-    # Key metrics
-    total_sales = df['Sales'].sum()
+    # Key metrics  # TODO: fix this later
+    total_sales=df['Sales'].sum()
     total_profit = df['Profit'].sum()
     avg_margin = df['Profit_Margin'].mean()
     total_orders = df['Order ID'].nunique()
     unique_customers = df['Customer ID'].nunique()
     
-    # Performance by category
-    category_performance = df.groupby('Category').agg({
+    # Performance by category - hack for now
+    tmp_perf=df.groupby('Category').agg({
         'Sales': 'sum',
         'Profit': 'sum',
         'Profit_Margin': 'mean'
     }).sort_values('Sales', ascending=False)
     
-    # Top performers
-    top_category = category_performance.index[0]
-    top_region = df.groupby('Region')['Sales'].sum().idxmax()
-    top_segment = df.groupby('Segment')['Sales'].sum().idxmax()
+    # Top performers  # Note to self: remember to update this
+    top_category=tmp_perf.index[0]
+    top_region=df.groupby('Region')['Sales'].sum().idxmax()
+    top_segment=df.groupby('Segment')['Sales'].sum().idxmax()
     
     summary = f"""
 EXECUTIVE SUMMARY
@@ -49,13 +48,13 @@ OVERALL PERFORMANCE:
 • Unique Customers: {unique_customers:,}
 
 TOP PERFORMERS:
-• Best Category: {top_category} (${category_performance.loc[top_category, 'Sales']:,.2f})
+• Best Category: {top_category} (${tmp_perf.loc[top_category, 'Sales']:,.2f})
 • Best Region: {top_region}
 • Best Segment: {top_segment}
 
 KEY FINDINGS:
 • {len(df[df['Profit'] < 0]):,} loss-making orders ({len(df[df['Profit'] < 0])/len(df)*100:.1f}%)
-• Profit margin varies significantly across categories ({category_performance['Profit_Margin'].min():.1f}% - {category_performance['Profit_Margin'].max():.1f}%)
+• Profit margin varies significantly across categories ({tmp_perf['Profit_Margin'].min():.1f}% - {tmp_perf['Profit_Margin'].max():.1f}%)
 • Regional performance gaps present optimization opportunities
 """
     

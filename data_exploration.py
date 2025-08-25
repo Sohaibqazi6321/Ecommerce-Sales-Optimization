@@ -12,11 +12,8 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-def load_and_explore_data():
-    """
-    Load the Superstore dataset and perform initial exploration
-    """
-    print("="*60)
+def load_dataset():
+    """Gets the data"""
     print("STEP 2: DATA LOADING AND EXPLORATION")
     print("="*60)
     
@@ -49,7 +46,7 @@ def load_and_explore_data():
         return None
     
     # Basic dataset information
-    print(f"\nDATASET OVERVIEW")
+    print(f"\nDATASET OVERVIEW")  # TODO: fix this later
     print(f"Shape: {df.shape}")
     print(f"Columns: {len(df.columns)}")
     print(f"Memory usage: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB")
@@ -69,12 +66,12 @@ def load_and_explore_data():
     
     # Missing values analysis
     print(f"\nMISSING VALUES ANALYSIS:")
-    missing_data = df.isnull().sum()
-    missing_percent = (missing_data / len(df)) * 100
+    tmp_data = df.isnull().sum()
+    missing_percent=(tmp_data / len(df)) * 100
     
     missing_df = pd.DataFrame({
         'Column': df.columns,
-        'Missing_Count': missing_data.values,
+        'Missing_Count': tmp_data.values,
         'Missing_Percent': missing_percent.values
     })
     
@@ -106,7 +103,7 @@ def load_and_explore_data():
     print(f"\nKEY COLUMNS IDENTIFIED:")
     
     # Find sales/revenue column
-    sales_cols = [col for col in df.columns if any(word in col.lower() for word in ['sales', 'revenue'])]
+    sales_cols=[col for col in df.columns if any(word in col.lower() for word in ['sales', 'revenue'])]  # Note to self: remember to update this
     print(f"Sales columns: {sales_cols}")
     
     # Find profit column
@@ -132,13 +129,10 @@ def load_and_explore_data():
     return df
 
 def analyze_data_quality(df):
-    """
-    Analyze data quality issues
-    """
     print(f"\nDATA QUALITY ANALYSIS:")
     
-    # Check for duplicates
-    duplicate_count = df.duplicated().sum()
+    # Check for duplicates - hack for now
+    duplicate_count=df.duplicated().sum()
     print(f"Duplicate rows: {duplicate_count}")
     
     # Check for negative values in sales/profit columns

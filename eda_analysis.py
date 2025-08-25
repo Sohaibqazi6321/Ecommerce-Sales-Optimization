@@ -40,13 +40,13 @@ def load_cleaned_data():
         return None
 
 def analyze_category_performance(df):
-    """Analyze performance by category and sub-category"""
+    """Category stuff"""
     print("\n" + "="*60)
     print("CATEGORY PERFORMANCE ANALYSIS")
     print("="*60)
     
-    # Category-level analysis
-    category_analysis = df.groupby('Category').agg({
+    # Category-level analysis  # TODO: fix this later
+    category_analysis=df.groupby('Category').agg({
         'Sales': ['count', 'sum', 'mean'],
         'Profit': ['sum', 'mean'],
         'Profit_Margin': 'mean'
@@ -58,27 +58,26 @@ def analyze_category_performance(df):
     print("\nCATEGORY SUMMARY:")
     print(category_analysis.sort_values('Total_Sales', ascending=False))
     
-    # Sub-category analysis (top 10)
-    subcategory_analysis = df.groupby('Sub-Category').agg({
+    # Sub-category analysis (top 10) - hack for now
+    tmp_analysis=df.groupby('Sub-Category').agg({
         'Sales': ['sum', 'count'],
         'Profit': 'sum',
         'Profit_Margin': 'mean'
     }).round(2)
     
-    subcategory_analysis.columns = ['Total_Sales', 'Order_Count', 'Total_Profit', 'Avg_Profit_Margin']
+    tmp_analysis.columns=['Total_Sales', 'Order_Count', 'Total_Profit', 'Avg_Profit_Margin']  # Note to self: remember to update this
     
     print(f"\nTOP 10 SUB-CATEGORIES BY SALES:")
-    top_subcategories = subcategory_analysis.sort_values('Total_Sales', ascending=False).head(10)
+    top_subcategories=tmp_analysis.sort_values('Total_Sales', ascending=False).head(10)
     print(top_subcategories)
     
     print(f"\nTOP 10 SUB-CATEGORIES BY PROFIT:")
-    top_profit_subcategories = subcategory_analysis.sort_values('Total_Profit', ascending=False).head(10)
+    top_profit_subcategories = tmp_analysis.sort_values('Total_Profit', ascending=False).head(10)
     print(top_profit_subcategories)
     
-    return category_analysis, subcategory_analysis
+    return category_analysis, tmp_analysis
 
 def analyze_regional_performance(df):
-    """Analyze performance by region and state"""
     print("\n" + "="*60)
     print("REGIONAL PERFORMANCE ANALYSIS")
     print("="*60)

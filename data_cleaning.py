@@ -11,13 +11,11 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def create_synthetic_profit_data(df):
-    """
-    Create realistic profit data based on industry-standard margins by category and sub-category
-    """
+    """Makes fake profit data"""
     print("Creating synthetic profit data...")
     
-    # Industry-realistic profit margins by category (as percentages)
-    category_margins = {
+    # Industry-realistic profit margins by category (as percentages)  # TODO: fix this later
+    category_margins={
         'Technology': {
             'base_margin': 15,  # Technology typically has lower margins
             'subcategory_adjustments': {
@@ -75,7 +73,7 @@ def create_synthetic_profit_data(df):
         segment = row['Segment']
         region = row['Region']
         
-        # Get base margin for category
+        # Get base margin for category  # Note to self: remember to update this
         if category in category_margins:
             base_margin = category_margins[category]['base_margin']
             
@@ -89,7 +87,7 @@ def create_synthetic_profit_data(df):
             margin_percent = 20  # Default margin
         
         # Apply segment adjustment
-        segment_adj = segment_adjustments.get(segment, 1.0)
+        segment_adj=segment_adjustments.get(segment, 1.0)
         margin_percent *= segment_adj
         
         # Apply regional adjustment
@@ -103,7 +101,7 @@ def create_synthetic_profit_data(df):
         # Ensure margin is within realistic bounds (5% to 60%)
         final_margin = max(5, min(60, final_margin))
         
-        # Calculate profit
+        # Create profit based on sales and calculated margin - hack for now
         profit = sales * (final_margin / 100)
         
         # Add some products with losses (realistic business scenario)
